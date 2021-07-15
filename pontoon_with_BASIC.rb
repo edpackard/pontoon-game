@@ -32,21 +32,21 @@ end
 def first_deal pack, suits, player, aces, computer, computer_aces
   # 180 LOCATE 10,3
   # 190 PRINT"YOU";SPC(15);"HOUSE"
-  puts "You#{' '*15}House"
+  puts "You#{' ' * 15}House"
   # 200 LOCATE 3,5
   # 210 GOSUB 740
   value = deal(pack, suits)
   # 220 S=S+F
   player += value
   # 230 IF F=11 THEN ACES=ACES+1
-  aces +=1 if value == 11
+  aces += 1 if value == 11
   # 240 LOCATE 3,6
   # 250 GOSUB 740
   value = deal(pack, suits)
   # 260 S=S+F
   player += value
   # 270 IF F=11 THEN ACES=ACES+1
-  aces +=1 if value == 11
+  aces += 1 if value == 11
   # 280 LOCATE 24,5
   print ' ' * 18
   # 290 GOSUB 740
@@ -54,7 +54,7 @@ def first_deal pack, suits, player, aces, computer, computer_aces
   # 300 T=T+F
   computer += value
   # 310 IF F=11 THEN CACES=CACES+1
-  computer_aces +=1 if value == 11
+  computer_aces += 1 if value == 11
   # 320 LOCATE 24,6
   print ' ' * 18
   # 330 GOSUB 740
@@ -62,7 +62,7 @@ def first_deal pack, suits, player, aces, computer, computer_aces
   # 340 T=T+F
   computer += value
   # 350 IF F=11 THEN CACES=CACES+1
-  computer_aces +=1 if value == 11
+  computer_aces += 1 if value == 11
 
   input(pack, suits, player, aces, computer, computer_aces)
 end
@@ -72,7 +72,7 @@ def input pack, suits, player, aces, computer, computer_aces
   # 370 X$=INKEY$:IF X$<>"S" AND X$<>"T" THEN 370
   puts "Twist (T) or Stick (S) ?"
   answer = gets.chomp.upcase
-  input(pack, suits, player,aces, computer, computer_aces) if (answer != "S" && answer != "T")
+  input(pack, suits, player, aces, computer, computer_aces) if (answer != "S" && answer != "T")
   # 380 IF X$="S" THEN 560
   stick(pack, suits, player, computer, computer_aces) if answer == "S"
   # 390 LOCATE 3,YC+5
@@ -86,7 +86,7 @@ def input pack, suits, player, aces, computer, computer_aces
   score_check(pack, suits, player, aces, computer, computer_aces)
 end
 
-# 440 REM CHECK SCORE AND ACES
+#  440 REM CHECK SCORE AND ACES
 def score_check pack, suits, player, aces, computer, computer_aces
   # 450 IF S<22 THEN 370
   input(pack, suits, player, aces, computer, computer_aces) if player < 22
@@ -97,7 +97,7 @@ def score_check pack, suits, player, aces, computer, computer_aces
     # 480 S = S-10
     player -= 10
     # 490 GOTO 450
-    score_check(pack,suits,player,aces,computer,computer_aces)
+    score_check(pack, suits, player, aces, computer, computer_aces)
   end
   # 500 LOCATE 12,19
   # 510 PRINT "YOU'RE BUST"
@@ -129,12 +129,12 @@ def stick pack, suits, player, computer, computer_aces
   # 600 T=T+F
   computer += value
   # 610 IF F=11 THEN CACES=CACES+1
-  computer_aces +=1 if value == 11
+  computer_aces += 1 if value == 11
   # 620 IF T<21 THEN 560
   stick(pack, suits, player, computer, computer_aces) if computer < 21
   # 630 IF CACES = 0 THEN 670
   # result("p", player, computer) if computer_aces == 0
-  result(player,computer) if computer_aces == 0
+  result(player, computer) if computer_aces == 0
   # 640 CACES = CACES-1
   computer_aces -= 1
   # 650 T=T-10
@@ -163,15 +163,15 @@ end
 # 740 REM DEAL CARD
 def deal pack, suits
   # 750 LET CARD=INT ( RND (1)*52+1 )
-  card = rand(52)+1 # between 1 and 52
+  card = rand(52) + 1 # between 1 and 52
   # 760 IF PACK(CARD)=1 THEN GOTO 750
-  if pack[card]==1
+  if pack[card] == 1
     deal(pack, suits)
-  elsif pack[card]==0
+  elsif pack[card] == 0
     # 770 PACK(CARD)=1
     pack[card] = 1
     # 780 F=CARD-13*INT(CARD/13)
-    value = card - (13 * (card/13).to_i)
+    value = card - (13 * (card / 13).to_i)
     # 790 IF F=0 THEN F=13
     value = 13 if value == 0
     # 800 IF F=1 OR F>10 THEN GOTO 850
@@ -186,7 +186,7 @@ def deal pack, suits
     # 890 F = 11
     # 900 PRINT "ACE OF   ";
     # 910 GOTO 830
-    suit = suits[(((card-1)/13).to_i)]
+    suit = suits[(((card - 1) / 13).to_i)]
     if value == 1
       puts "Ace of #{suit}"
     elsif value == 11
