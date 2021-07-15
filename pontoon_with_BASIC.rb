@@ -67,21 +67,21 @@ def first_deal pack, suits, player, aces, computer, computer_aces
   input(pack, suits, player, aces, computer, computer_aces)
 end
 
-#360 REM INPUT OPTION - TWIST (T) OR STICK (S)
+# 360 REM INPUT OPTION - TWIST (T) OR STICK (S)
 def input pack, suits, player, aces, computer, computer_aces
-  #370 X$=INKEY$:IF X$<>"S" AND X$<>"T" THEN 370
+  # 370 X$=INKEY$:IF X$<>"S" AND X$<>"T" THEN 370
   puts "Twist (T) or Stick (S) ?"
   answer = gets.chomp.upcase
   input(pack, suits, player,aces, computer, computer_aces) if (answer != "S" && answer != "T")
-  #380 IF X$="S" THEN 560
+  # 380 IF X$="S" THEN 560
   stick(pack, suits, player, computer, computer_aces) if answer == "S"
-  #390 LOCATE 3,YC+5
-  #400 YC=YC+1
-  #410 GOSUB 740
+  # 390 LOCATE 3,YC+5
+  # 400 YC=YC+1
+  # 410 GOSUB 740
   value = deal(pack, suits)
-  #420 S=S+F
+  # 420 S=S+F
   player += value
-  #430 IF F=11 THEN ACES=ACES+1 
+  # 430 IF F=11 THEN ACES=ACES+1
   aces += 1 if value == 11
   score_check(pack, suits, player, aces, computer, computer_aces)
 end
@@ -108,7 +108,7 @@ end
 def go_again
   loop do
     # 520 PRINT "ANOTHER GAME (Y/N)"
-    puts "Another Game? (Y/N)" 
+    puts "Another Game? (Y/N)"
     # 530 X$=INKEY$:IF X$<>"Y" AND X$<>"N" THEN 530
     answer = gets.chomp.upcase
     # 540 IF X$="Y" THEN RUN
@@ -119,43 +119,43 @@ def go_again
 end
 
 def stick pack, suits, player, computer, computer_aces
-  #560 IF T>16 THEN GOTO 700
+  # 560 IF T>16 THEN GOTO 700
   result player, computer if computer > 16
-  #570 CC=CC+1
-  #580 LOCATE 24,CC+4
+  # 570 CC=CC+1
+  # 580 LOCATE 24,CC+4
   print ' ' * 18
-  #590 GOSUB 740
+  # 590 GOSUB 740
   value = deal(pack, suits)
-  #600 T=T+F
+  # 600 T=T+F
   computer += value
-  #610 IF F=11 THEN CACES=CACES+1
+  # 610 IF F=11 THEN CACES=CACES+1
   computer_aces +=1 if value == 11
-  #620 IF T<21 THEN 560
+  # 620 IF T<21 THEN 560
   stick(pack, suits, player, computer, computer_aces) if computer < 21
-  #630 IF CACES = 0 THEN 670
-  #result("p", player, computer) if computer_aces == 0
+  # 630 IF CACES = 0 THEN 670
+  # result("p", player, computer) if computer_aces == 0
   result(player,computer) if computer_aces == 0
-  #640 CACES = CACES-1
+  # 640 CACES = CACES-1
   computer_aces -= 1
-  #650 T=T-10
+  # 650 T=T-10
   computer -= 10
-  #660 GOTO 620
+  # 660 GOTO 620
   stick(pack, suits, player, computer, computer_aces) if computer < 21
 end
 
 def result player, computer
   if computer > 21 || computer < player
-    #670 LOCATE 12,19
-    #680 PRINT "YOU WIN!"
+    # 670 LOCATE 12,19
+    # 680 PRINT "YOU WIN!"
     puts "You win!"
-    #690 GOTO 520
+    # 690 GOTO 520
     go_again
-  #700 LOCATE 12,19
-  #710 IF T<S THEN 680
+    # 700 LOCATE 12,19
+    # 710 IF T<S THEN 680
   else
-  #720 PRINT "THE HOUSE WINS"
+    # 720 PRINT "THE HOUSE WINS"
     puts "The House wins!"
-    #730 GOTO 520
+    # 730 GOTO 520
     go_again
   end
 end
@@ -205,7 +205,3 @@ def deal pack, suits
 end
 
 initialise
-
-
-
-
