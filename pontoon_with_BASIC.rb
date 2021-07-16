@@ -19,7 +19,7 @@ def initialise
   # 110 SUIT$(4)="DIAMONDS"
   suits = ['Clubs', 'Hearts', 'Spades', 'Diamonds']
   # 120 CLS
-  system  'clear' or system 'cls'
+  system 'clear' or system 'cls'
   # 130 DIM PACK(52)
   # 140 FOR X=1 TO 52
   # 150 PACK (X)=0
@@ -63,7 +63,6 @@ def first_deal(pack, suits, player, aces, computer, computer_aces)
   computer += value
   # 350 IF F=11 THEN CACES=CACES+1
   computer_aces += 1 if value == 11
-
   input(pack, suits, player, aces, computer, computer_aces)
 end
 
