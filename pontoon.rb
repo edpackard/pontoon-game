@@ -5,12 +5,12 @@
 def initialise
   aces = computer_aces = player = computer = 0
   suits = ['Clubs', 'Hearts', 'Spades', 'Diamonds']
-  system  "clear" or system "cls"
+  system 'clear' or system 'cls'
   pack = Array.new(53, 0)
   first_deal(pack, suits, player, aces, computer, computer_aces)
 end
 
-def first_deal pack, suits, player, aces, computer, computer_aces
+def first_deal(pack, suits, player, aces, computer, computer_aces)
   puts "You#{' ' * 15}House"
   value = deal(pack, suits)
   player += value
@@ -29,18 +29,18 @@ def first_deal pack, suits, player, aces, computer, computer_aces
   input(pack, suits, player, aces, computer, computer_aces)
 end
 
-def input pack, suits, player, aces, computer, computer_aces
-  puts "Twist (T) or Stick (S) ?"
+def input(pack, suits, player, aces, computer, computer_aces)
+  puts 'Twist (T) or Stick (S) ?'
   answer = gets.chomp.upcase
-  input(pack, suits, player, aces, computer, computer_aces) if (answer != "S" && answer != "T")
-  stick(pack, suits, player, computer, computer_aces) if answer == "S"
+  input(pack, suits, player, aces, computer, computer_aces) if (answer != 'S' && answer != 'T')
+  stick(pack, suits, player, computer, computer_aces) if answer == 'S'
   value = deal(pack, suits)
   player += value
   aces += 1 if value == 11
   score_check(pack, suits, player, aces, computer, computer_aces)
 end
 
-def score_check pack, suits, player, aces, computer, computer_aces
+def score_check(pack, suits, player, aces, computer, computer_aces)
   input(pack, suits, player, aces, computer, computer_aces) if player < 22
   if aces > 0
     aces -= 1
@@ -53,14 +53,14 @@ end
 
 def go_again
   loop do
-    puts "Another Game? (Y/N)"
+    puts 'Another Game? (Y/N)'
     answer = gets.chomp.upcase
     initialise if answer == 'Y'
     exit if answer == 'N'
   end
 end
 
-def stick pack, suits, player, computer, computer_aces
+def stick(pack, suits, player, computer, computer_aces)
   result player, computer if computer > 16
   print ' ' * 18
   value = deal(pack, suits)
@@ -73,17 +73,17 @@ def stick pack, suits, player, computer, computer_aces
   stick(pack, suits, player, computer, computer_aces) if computer < 21
 end
 
-def result player, computer
+def result(player, computer)
   if computer > 21 || computer < player
-    puts "You win!"
+    puts 'You win!'
     go_again
   else
-    puts "The House wins!"
+    puts 'The House wins!'
     go_again
   end
 end
 
-def deal pack, suits
+def deal(pack, suits)
   card = rand(52) + 1
   if pack[card] == 1
     deal(pack, suits)
