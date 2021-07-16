@@ -19,7 +19,7 @@ def initialise
   # 110 SUIT$(4)="DIAMONDS"
   suits = ['Clubs', 'Hearts', 'Spades', 'Diamonds']
   # 120 CLS
-  system  "clear" or system "cls"
+  system  'clear' or system 'cls'
   # 130 DIM PACK(52)
   # 140 FOR X=1 TO 52
   # 150 PACK (X)=0
@@ -29,7 +29,7 @@ def initialise
 end
 
 # 170 REM DEAL TWO CARDS TO EACH PLAYER
-def first_deal pack, suits, player, aces, computer, computer_aces
+def first_deal(pack, suits, player, aces, computer, computer_aces)
   # 180 LOCATE 10,3
   # 190 PRINT"YOU";SPC(15);"HOUSE"
   puts "You#{' ' * 15}House"
@@ -68,13 +68,13 @@ def first_deal pack, suits, player, aces, computer, computer_aces
 end
 
 # 360 REM INPUT OPTION - TWIST (T) OR STICK (S)
-def input pack, suits, player, aces, computer, computer_aces
+def input(pack, suits, player, aces, computer, computer_aces)
   # 370 X$=INKEY$:IF X$<>"S" AND X$<>"T" THEN 370
-  puts "Twist (T) or Stick (S) ?"
+  puts 'Twist (T) or Stick (S) ?'
   answer = gets.chomp.upcase
-  input(pack, suits, player, aces, computer, computer_aces) if (answer != "S" && answer != "T")
+  input(pack, suits, player, aces, computer, computer_aces) if (answer != 'S' && answer != 'T')
   # 380 IF X$="S" THEN 560
-  stick(pack, suits, player, computer, computer_aces) if answer == "S"
+  stick(pack, suits, player, computer, computer_aces) if answer == 'S'
   # 390 LOCATE 3,YC+5
   # 400 YC=YC+1
   # 410 GOSUB 740
@@ -86,8 +86,8 @@ def input pack, suits, player, aces, computer, computer_aces
   score_check(pack, suits, player, aces, computer, computer_aces)
 end
 
-#  440 REM CHECK SCORE AND ACES
-def score_check pack, suits, player, aces, computer, computer_aces
+# 440 REM CHECK SCORE AND ACES
+def score_check(pack, suits, player, aces, computer, computer_aces)
   # 450 IF S<22 THEN 370
   input(pack, suits, player, aces, computer, computer_aces) if player < 22
   # 460 IF ACES = 0 THEN 500
@@ -108,7 +108,7 @@ end
 def go_again
   loop do
     # 520 PRINT "ANOTHER GAME (Y/N)"
-    puts "Another Game? (Y/N)"
+    puts 'Another Game? (Y/N)'
     # 530 X$=INKEY$:IF X$<>"Y" AND X$<>"N" THEN 530
     answer = gets.chomp.upcase
     # 540 IF X$="Y" THEN RUN
@@ -118,9 +118,9 @@ def go_again
   end
 end
 
-def stick pack, suits, player, computer, computer_aces
+def stick(pack, suits, player, computer, computer_aces)
   # 560 IF T>16 THEN GOTO 700
-  result player, computer if computer > 16
+  result(player, computer) if computer > 16
   # 570 CC=CC+1
   # 580 LOCATE 24,CC+4
   print ' ' * 18
@@ -143,25 +143,25 @@ def stick pack, suits, player, computer, computer_aces
   stick(pack, suits, player, computer, computer_aces) if computer < 21
 end
 
-def result player, computer
+def result(player, computer)
   if computer > 21 || computer < player
     # 670 LOCATE 12,19
     # 680 PRINT "YOU WIN!"
-    puts "You win!"
+    puts 'You win!'
     # 690 GOTO 520
     go_again
     # 700 LOCATE 12,19
     # 710 IF T<S THEN 680
   else
     # 720 PRINT "THE HOUSE WINS"
-    puts "The House wins!"
+    puts 'The House wins!'
     # 730 GOTO 520
     go_again
   end
 end
 
 # 740 REM DEAL CARD
-def deal pack, suits
+def deal(pack, suits)
   # 750 LET CARD=INT ( RND (1)*52+1 )
   card = rand(52) + 1 # between 1 and 52
   # 760 IF PACK(CARD)=1 THEN GOTO 750
